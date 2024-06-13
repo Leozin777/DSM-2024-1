@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../data/models/character.dart';
 import '../../data/services/character_service.dart';
 
@@ -32,7 +31,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
     setState(() {
       _charactersFiltered = _characters
           .where((element) =>
-          element.name.toLowerCase().contains(filtro.toLowerCase()))
+              element.name.toLowerCase().contains(filtro.toLowerCase()))
           .toList();
     });
   }
@@ -40,14 +39,20 @@ class _CharacterScreenState extends State<CharacterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Characters"),
+      ),
       body: Column(
         children: [
-          TextField(
-            onChanged: (value) {
-              _filterCharacters(value);
-            },
-            decoration: const InputDecoration(
-              labelText: "Filtro",
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: TextField(
+              onChanged: (value) {
+                _filterCharacters(value);
+              },
+              decoration: const InputDecoration(
+                labelText: "Filtro",
+              ),
             ),
           ),
           Expanded(
@@ -61,7 +66,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                           return ListTile(
                             title: Text(_charactersFiltered[index].name),
                             leading:
-                            Image.network(_charactersFiltered[index].image),
+                                Image.network(_charactersFiltered[index].image),
                           );
                         },
                         separatorBuilder: (context, int) {
